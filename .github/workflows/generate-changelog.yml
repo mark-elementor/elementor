@@ -22,14 +22,14 @@ jobs:
       - name: Get Release Date
         id: get-release-date
         run: |
-          RELEASE_DATE=$(curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.event.inputs.release }}" | jq -r '.published_at')
+          RELEASE_DATE=$(curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/elementor/elementor/releases/tags/${{ github.event.inputs.release }}" | jq -r '.published_at')
           echo "RELEASE_DATE=$RELEASE_DATE" >> $GITHUB_ENV
 
       - name: Fetch merged PRs after release
         id: fetch-prs
         run: |
           echo "PR Title,PR Link,PR Owner,Jira Task URL" > merged_prs.csv
-          pr_data=$(curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls?state=closed&base=${{ github.event.inputs.branch }}&per_page=100")
+          pr_data=$(curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/elementor/elementor/pulls?state=closed&base=${{ github.event.inputs.branch }}&per_page=100")
           echo "$pr_data" | jq -r --arg RELEASE_DATE "$RELEASE_DATE" '
             def construct_jira_url(tid):
               if tid | test("^[A-Za-z]{2,4}-\\d{4,6}$") then "https://elementor.atlassian.net/browse/" + tid
