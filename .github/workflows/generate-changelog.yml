@@ -24,6 +24,7 @@ jobs:
         run: ./.github/scripts/get_release_date.sh
         env:
           INPUT_RELEASE: ${{ github.event.inputs.release }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fetch merged PRs after release
         id: fetch-prs
