@@ -32,6 +32,7 @@ jobs:
         env:
           INPUT_BRANCH: ${{ github.event.inputs.branch }}
           RELEASE_DATE: ${{ env.RELEASE_DATE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload merged PRs as artifact
         uses: actions/upload-artifact@v3
