@@ -30,6 +30,7 @@ jobs:
         run: ./.github/scripts/fetch_merged_prs.sh
         env:
           INPUT_BRANCH: ${{ github.event.inputs.branch }}
+          RELEASE_DATE: ${{ env.RELEASE_DATE }}
 
       - name: Upload merged PRs as artifact
         uses: actions/upload-artifact@v3
