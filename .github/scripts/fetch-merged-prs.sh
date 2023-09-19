@@ -2,6 +2,9 @@
 
 echo "PR Title,PR Link,PR Owner,Jira Task URL" > merged_prs.csv
 
+INPUT_BRANCH=$1
+RELEASE_DATE=$2
+GITHUB_TOKEN=$3
 PAGE=1
 
 while : ; do
