@@ -12,6 +12,8 @@ while : ; do
     -H "Authorization: token $GITHUB_TOKEN" \
     "https://api.github.com/repos/elementor/elementor/pulls?state=closed&base=$INPUT_BRANCH&per_page=100&page=$PAGE")
 
+	echo "$response"
+
   echo "$response" | jq -r --arg RELEASE_DATE "$RELEASE_DATE" '
     def construct_jira_url(tid):
       if tid | test("^[A-Za-z]{2,4}-\\d{4,6}$") then "https://elementor.atlassian.net/browse/" + tid
